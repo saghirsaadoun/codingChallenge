@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('preferredshops') }}
+{% endblock %}
+
+
+{% block title %}My Preferred Shops{% endblock %}
+
+
+{% block body %}
+    <div class="row">
+        {% for shop in shops %}
+            <div id="div_shop_{{ shop.getId() }}" class="col-md-4">
+                <figure class="card card-product">
+                    <div class="img-wrap"><img alt="{{ shop.getName() }}" class="pic-1"
+                                               src="{{ shop.getPhotourl() }}"></div>
+                    <figcaption class="info-wrap min-height-180">
+                        <h4 class="title">{{ shop.getName() }}</h4>
+                        <p class="desc bottom-align-text min-height-50"><i class="fa fa-map-marker"></i> --</p>
+                    </figcaption>
+                    <div class="bottom-wrap">
+                        <button id="btnRemove_{{ shop.getId() }}" type="button" class="btn btn-labeled btn-danger"
+                                data-id="{{ shop.getId() }}"><span
+                                    class="btn-label"><i class="fa fa-times"></i></span>Remove
+                        </button>
+                    </div>
+                </figure>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script type="text/javascript">
+        {#localStorage.setItem("shopsJson", {{ shopsJson | json_encode }});#}
+        window.shopsJson = JSON.parse({{ shopsJson | json_encode(constant('JSON_PRETTY_PRINT'))|raw }});
+    </script>
+
+    {{ encore_entry_script_tags('preferredshops') }}
+{% endblock %}
+

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('nearbyshops') }}
+{% endblock %}
+
+
+
+{% block title %}Nearby Shops{% endblock %}
+
+
+{% block body %}
+    <div class="row">
+        <ul id="shops" class="row">
+        </ul>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAh0jfsgLlLf1u6vykoJ7Ll-icf7OpKDNU&libraries=places"></script>
+
+    <script type="text/javascript">
+        window.shopsJson = JSON.parse({{ shopsJson | json_encode(constant('JSON_PRETTY_PRINT'))|raw }});
+    </script>
+    {{ encore_entry_script_tags('nearbyshops') }}
+{% endblock %}
